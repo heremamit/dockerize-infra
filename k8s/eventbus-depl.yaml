@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: eventbus-depl
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: eventbus
+    template:
+        metadata:
+            labels:
+                app: eventbus
+        spec:
+            containers:
+                - name: operations
+                  image: docker2amit/eventbus:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: eventbus-srv
+spec:
+    selector:
+        app: eventbus
+    type: ClusterIP
+    ports:
+        - name: eventbus
+          port: 3001
+          targetPort: 3001
+          protocol: TCP
+

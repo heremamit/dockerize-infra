@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+    name: ingress-srv
+    annotations:
+        kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: project.com
+      http:
+        paths:
+          - path: /helloworld
+            backend:
+              serviceName: operations-clusterip-srv
+              servicePort: 3000
+          - path: /postevents
+            backend:
+              serviceName: operations-clusterip-srv
+              servicePort: 3000
+          - path: /busevents
+            backend:
+              serviceName: eventbus-srv
+              servicePort: 3001
+          
+                 

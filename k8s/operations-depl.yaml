@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: operations-depl
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: operations
+    template:
+        metadata:
+            labels:
+                app: operations
+        spec:
+            containers:
+                - name: operations
+                  image: docker2amit/operations:latest
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: operations-clusterip-srv
+spec:
+    selector:
+        app: operations
+    type: ClusterIP
+    ports:
+        - name: eventbus
+          port: 3000
+          targetPort: 3000
+          protocol: TCP
