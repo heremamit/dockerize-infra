@@ -26,7 +26,7 @@ spec:
         app: operations
     type: ClusterIP
     ports:
-        - name: eventbus
+        - name: operations
           port: 3000
           targetPort: 3000
           protocol: TCP

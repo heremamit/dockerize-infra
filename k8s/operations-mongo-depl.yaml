@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: operations-mongo-depl
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: operations-mongo
+    template:
+        metadata:
+            labels:
+                app: operations-mongo
+        spec:
+            containers:
+                - name: operations-mongo
+                  image: mongo
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: operations-mongo-srv
+spec:
+    selector:
+        app: operations-mongo
+    type: ClusterIP
+    ports:
+        - name: operation-mongo
+          port: 27017
+          targetPort: 27017
+          protocol: TCP
