@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: documents-depl
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: documents
+    template:
+        metadata:
+            labels:
+                app: documents
+        spec:
+            containers:
+                - name: documents
+                  image: docker2amit/documents:latest
+                 
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: documents-clusterip-srv
+spec:
+    selector:
+        app: documents
+    type: ClusterIP
+    ports:
+        - name: documents
+          port: 3002
+          targetPort: 3002
+          protocol: TCP

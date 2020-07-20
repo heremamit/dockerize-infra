@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: documents-mongo-depl
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: documents-mongo
+    template:
+        metadata:
+            labels:
+                app: documents-mongo
+        spec:
+            containers:
+                - name: documents-mongo
+                  image: mongo
+                   
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: documents-mongo-srv
+spec:
+    selector:
+        app: documents-mongo
+    type: ClusterIP
+    ports:
+        - name: documents-mongo
+          port: 27018
+          targetPort: 27017
+          protocol: TCP
