@@ -21,11 +21,7 @@ spec:
             backend:
               serviceName: eventbus-srv
               servicePort: 3001
-          - path: /documenthelloworld
-            backend:
-              serviceName: documents-clusterip-srv
-              servicePort: 3002
-          - path: /document/uploadDocument
+          - path: /document/
             backend:
               serviceName: documents-clusterip-srv
               servicePort: 3002
